@@ -1,0 +1,2 @@
+ this template use for another file then css  and ja file get from this temple css or js 
+ for this - use <lint assets  then path  {{}}  .. it will be work

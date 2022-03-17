@@ -1,0 +1,78 @@
+
+
+
+
+
+
+        Schema::create('sale_invoices', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->foreign('admin_id')->references('id')->on('admins');
+            $table->string('challan_no')->nullable();
+            $table->date('date');
+            $table->timestamps();
+        });
+
+        Schema::create('sale_items', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->unsignedBigInteger('sale_invoice_id')->nullable();
+            $table->foreign('sale_invoice_id')->references('id')->on('sale_invoices');
+            $table->double('quantity');
+            $table->double('price');
+            $table->double('total');
+            $table->timestamps();
+        });
+
+
+        Schema::create('purchase_invoices', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->foreign('admin_id')->references('id')->on('admins');
+            $table->string('challan_no')->nullable();
+            $table->date('date');
+            $table->timestamps();
+        });
+
+
+        Schema::create('purchase_items', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->unsignedBigInteger('purchase_invoice_id')->nullable();
+            $table->foreign('purchase_invoice_id')->references('id')->on('purchase_invoices');
+            $table->double('quantity');
+            $table->double('price');
+            $table->double('total');
+            $table->timestamps();
+        });
+
+
+        Schema::create('payments', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->foreign('admin_id')->references('id')->on('admins');
+            $table->double('amount');
+            $table->string('note');
+            $table->date('date');
+            $table->timestamps();
+        });
+
+        Schema::create('receipts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->foreign('admin_id')->references('id')->on('admins');
+            $table->double('amount');
+            $table->string('note');
+            $table->date('date');
+            $table->timestamps();
+        });
